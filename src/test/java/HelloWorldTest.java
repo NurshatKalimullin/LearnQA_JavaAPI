@@ -12,4 +12,9 @@ public class HelloWorldTest {
                 .andReturn();
         response.prettyPrint();
     }
+
+    @Test
+    public void testHelloFromMyName() {
+        System.out.println("Hello from Nurshat");
+    }
 }
