@@ -53,4 +53,49 @@ public class SecondHomeWorkTests {
             System.out.println(statusCode);
         }
     }
+
+    @Test
+    public void testToken() throws InterruptedException {
+        String url = "https://playground.learnqa.ru/ajax/api/longtime_job";
+
+        JsonPath response = RestAssured
+                .get(url)
+                .jsonPath();
+
+        String token =
+                response
+                        .get("token");
+        Map<String, Object> body = new HashMap<>();
+        body.put("token", token);
+
+        int seconds =
+                response
+                        .get("seconds");
+
+        JsonPath responseBeforeFinish = RestAssured
+                .given()
+                .queryParams(body)
+                .get(url)
+                .jsonPath();
+        String status =
+                responseBeforeFinish
+                        .get("status");
+        System.out.println(status);
+
+        Thread.sleep(seconds * 1000L);
+
+        JsonPath responseAfterFinish = RestAssured
+                .given()
+                .queryParams(body)
+                .get(url)
+                .jsonPath();
+        String result =
+                responseAfterFinish
+                        .get("result");
+        status =
+                responseAfterFinish
+                        .get("status");
+        System.out.println(result);
+        System.out.println(status);
+    }
 }
