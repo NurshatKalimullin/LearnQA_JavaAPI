@@ -34,4 +34,23 @@ public class SecondHomeWorkTests {
         String locationHeader = response.getHeader("Location");
         System.out.println(locationHeader);
     }
+
+
+    @Test
+    public void testRedirects() {
+        String url = "https://playground.learnqa.ru/api/long_redirect";
+        int statusCode = 301;
+        while (statusCode == 301) {
+            Response response = RestAssured
+                    .given()
+                    .redirects()
+                    .follow(false)
+                    .when()
+                    .get(url)
+                    .andReturn();
+            statusCode = response.statusCode();
+            url = response.getHeader("Location");
+            System.out.println(statusCode);
+        }
+    }
 }
