@@ -22,4 +22,16 @@ public class ThirdHomeWorkTests {
                 .andReturn();
         assertEquals(response.getCookie("HomeWork"), "hw_value", "HomeWork cookie value is incorrect");
     }
+
+
+    @Test
+    public void testHeader() {
+        Response response = RestAssured
+                .given()
+                .get("https://playground.learnqa.ru/api/homework_header")
+                .andReturn();
+        assertEquals(response.getHeader("x-secret-homework-header"),
+                "Some secret value",
+                "x-secret-homework-header header value is incorrect");
+    }
 }
