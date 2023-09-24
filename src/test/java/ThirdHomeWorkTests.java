@@ -12,4 +12,14 @@ public class ThirdHomeWorkTests {
         String text = "test test test test test";
         assertTrue(text.length() > 15, "The text contains less than 15 symbols");
     }
+
+
+    @Test
+    public void testCookie() {
+        Response response = RestAssured
+                .given()
+                .get("https://playground.learnqa.ru/api/homework_cookie")
+                .andReturn();
+        assertEquals(response.getCookie("HomeWork"), "hw_value", "HomeWork cookie value is incorrect");
+    }
 }
