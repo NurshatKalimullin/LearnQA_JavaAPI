@@ -21,6 +21,16 @@ public class ApiCoreRequests {
                 .andReturn();
     }
 
+    @Step("Make a GET request by id")
+    public Response makeGetRequestById(String url, int id, String header, String cookie) {
+        return given()
+                .filter(new AllureRestAssured())
+                .header("x-csrf-token", header)
+                .cookies("auth_sid", cookie)
+                .get(url + id)
+                .andReturn();
+    }
+
     @Step("Make a GET request with auth cookie only")
     public Response makeGetRequestWithCookie(String url, String cookie) {
         return given()
@@ -49,4 +59,8 @@ public class ApiCoreRequests {
                 .post(url)
                 .andReturn();
     }
+
+
+
+
 }
