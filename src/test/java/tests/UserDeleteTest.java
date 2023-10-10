@@ -1,21 +1,34 @@
 package tests;
 
+import io.qameta.allure.*;
 import io.restassured.response.Response;
 import lib.ApiCoreRequests;
 import lib.Assertions;
 import lib.BaseTestCase;
 import lib.DataGenerator;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import static io.qameta.allure.SeverityLevel.CRITICAL;
+import static io.qameta.allure.SeverityLevel.NORMAL;
+
+@Epic("User tests")
+@Feature("Non-essential features")
+@Story("Delete user")
 public class UserDeleteTest extends BaseTestCase {
 
     private final ApiCoreRequests apiCoreRequests = new ApiCoreRequests();
 
 
     @Test
+    @Description("This test tries to delete not-deletable user")
+    @DisplayName("Test delete a base user")
+    @Severity(NORMAL)
+    @Owner("Nurshat Kalimullin")
+    @Link(name = "Documentation", url = "https://playground.learnqa.ru/api/map")
     public void testDeleteBaseUser() {
         //LOGIN
         Map<String, String> authData = new HashMap<>();
@@ -53,6 +66,11 @@ public class UserDeleteTest extends BaseTestCase {
 
 
     @Test
+    @Description("This test deletes a usual user")
+    @DisplayName("Test delete a normal user")
+    @Severity(NORMAL)
+    @Owner("Nurshat Kalimullin")
+    @Link(name = "Documentation", url = "https://playground.learnqa.ru/api/map")
     public void testDeleteUser() {
         //GENERATE USER
         Map<String, String> userData = DataGenerator.getRegistrationData();
@@ -92,6 +110,11 @@ public class UserDeleteTest extends BaseTestCase {
 
 
     @Test
+    @Description("This test checks that one user is not able to delete another")
+    @DisplayName("Test delete a by another user")
+    @Severity(CRITICAL)
+    @Owner("Nurshat Kalimullin")
+    @Link(name = "Documentation", url = "https://playground.learnqa.ru/api/map")
     public void testDeleteUserByAnotherUser() {
         //GENERATE USER
         Map<String, String> userData = DataGenerator.getRegistrationData();

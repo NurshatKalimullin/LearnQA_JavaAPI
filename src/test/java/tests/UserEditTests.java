@@ -1,20 +1,33 @@
 package tests;
 
+import io.qameta.allure.*;
 import io.restassured.response.Response;
 import lib.ApiCoreRequests;
 import lib.Assertions;
 import lib.BaseTestCase;
 import lib.DataGenerator;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import static io.qameta.allure.SeverityLevel.CRITICAL;
+import static io.qameta.allure.SeverityLevel.NORMAL;
+
+@Epic("User tests")
+@Feature("Non-essential features")
+@Story("Update user")
 public class UserEditTests extends BaseTestCase {
 
     private final ApiCoreRequests apiCoreRequests = new ApiCoreRequests();
 
     @Test
+    @Description("This test checks that user is able to update  his data")
+    @DisplayName("Test update a user by the user")
+    @Severity(NORMAL)
+    @Owner("Nurshat Kalimullin")
+    @Link(name = "Documentation", url = "https://playground.learnqa.ru/api/map")
     public void testEditJustCreatedUser(){
         //GENERATE USER
         Map<String, String> userData = DataGenerator.getRegistrationData();
@@ -60,6 +73,11 @@ public class UserEditTests extends BaseTestCase {
 
 
     @Test
+    @Description("This test checks that user is not able to update his data without authorization")
+    @DisplayName("Test update a user by the user without auth")
+    @Severity(NORMAL)
+    @Owner("Nurshat Kalimullin")
+    @Link(name = "Documentation", url = "https://playground.learnqa.ru/api/map")
     public void testEditUserWithoutAuthorization(){
         //GENERATE USER
         Map<String, String> userData = DataGenerator.getRegistrationData();
@@ -103,6 +121,11 @@ public class UserEditTests extends BaseTestCase {
 
 
     @Test
+    @Description("This test checks that user is not able to update other users")
+    @DisplayName("Test update a user by another user")
+    @Severity(CRITICAL)
+    @Owner("Nurshat Kalimullin")
+    @Link(name = "Documentation", url = "https://playground.learnqa.ru/api/map")
     public void testEditUserByAnotherUser(){
         //GENERATE USER
         Map<String, String> userData = DataGenerator.getRegistrationData();
@@ -156,6 +179,11 @@ public class UserEditTests extends BaseTestCase {
 
 
     @Test
+    @Description("This test checks that user is not able to change email to a new incorrect one")
+    @DisplayName("Test update a user with incorrect email")
+    @Severity(NORMAL)
+    @Owner("Nurshat Kalimullin")
+    @Link(name = "Documentation", url = "https://playground.learnqa.ru/api/map")
     public void testEditUserToIncorrectEmail(){
         //GENERATE USER
         Map<String, String> userData = DataGenerator.getRegistrationData();
@@ -201,6 +229,14 @@ public class UserEditTests extends BaseTestCase {
 
 
     @Test
+    @Description("This test checks that user is not able to change first name to a new short one (one symbol)")
+    @DisplayName("Test update a user with incorrect first name")
+    @Severity(NORMAL)
+    @Owner("Nurshat Kalimullin")
+    @Link(name = "Documentation", url = "https://playground.learnqa.ru/api/map")
+    @Epic("User tests")
+    @Feature("Non-essential features")
+    @Story("Update user")
     public void testEditUserToExtremelyShortFirstName(){
         //GENERATE USER
         Map<String, String> userData = DataGenerator.getRegistrationData();
